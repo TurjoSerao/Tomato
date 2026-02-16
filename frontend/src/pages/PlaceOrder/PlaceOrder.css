@@ -1,0 +1,10 @@
+.place-order{
+    padding: 50px 0;
+    min-height: 70vh;
+}
+
+.place-order-title{
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
