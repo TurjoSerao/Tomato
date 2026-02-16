@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import './Cart.css';
 import { StoreContext } from '../../context/StoreContext';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
 
     const { cartItems, food_list, removeFromCart, getTotalCartAmount } = useContext(StoreContext);
+
+    const navigate = useNavigate();
 
     return (
         <div className='cart'>
@@ -20,20 +23,23 @@ const Cart = () => {
                 <br />
                 <hr />
                 {food_list.map((item) => {
-                    if (cartItems[item._id] > 0) {
+                    const qty = cartItems[item._id] || 0;
+                    if (qty > 0) {
                         return (
-                            <div><div className="cart-items-title cart-items-item">
-                                <img src={item.image} alt="" />
-                                <p>{item.name}</p>
-                                <p>${item.price}</p>
-                                <p>{cartItems[item._id]}</p>
-                                <p>${item.price * cartItems[item._id]}</p>
-                                <p onClick={() => removeFromCart(item._id)} className='cross'>x</p>
+                            <div key={item._id}>
+                                <div className="cart-items-title cart-items-item">
+                                    <img src={item.image} alt="" />
+                                    <p>{item.name}</p>
+                                    <p>${item.price}</p>
+                                    <p>{qty}</p>
+                                    <p>${item.price * qty}</p>
+                                    <p onClick={() => removeFromCart(item._id)} className='cross'>x</p>
+                                </div>
+                                <hr />
                             </div>
-                                <hr /></div>
-
                         )
                     }
+                    return null;
                 })}
             </div>
             <div className="cart-bottom">
@@ -47,21 +53,21 @@ const Cart = () => {
                         <hr />
                         <div className="cart-total-details">
                             <p>Delivery Fee</p>
-                            <p>${10}</p>
+                            <p>${getTotalCartAmount()===0?0:10}</p>
                         </div>
                         <hr />
                         <div className="cart-total-details">
                             <b>Total</b>
-                            <p>${getTotalCartAmount()+10}</p>
+                            <p>${getTotalCartAmount()===0?0:getTotalCartAmount() + 10}</p>
                         </div>
                     </div>
-                        <button>PROCEED TO CHECKOUT</button> 
+                    <button onClick={()=>navigate('/order')}>PROCEED TO CHECKOUT</button>
                 </div>
                 <div className="cart-promocode">
                     <div>
                         <p>If have a Promo code, Ender it here</p>
                         <div className='cart-promocode-input'>
-                            <input type="text" placeholder='promo code'/>
+                            <input type="text" placeholder='promo code' />
                             <button>Submit</button>
                         </div>
                     </div>
