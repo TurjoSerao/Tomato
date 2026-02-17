@@ -10,7 +10,7 @@ const addFood = async (req, res) => {
     console.log("📩 Received request - Body:", req.body);
     console.log("📁 File received:", req.file);
     console.log("🔍 All fields:", Object.keys(req.body));
-    console.log("🔍 Multer fields:", req.files);
+    console.log("🔍 Multer fields:", req.file);
 
     // Check if file was sent
     if (!req.file) {
@@ -38,16 +38,29 @@ const addFood = async (req, res) => {
         res.json({ success: false, message: "Error: " + error.message })
     }
 }
+// delete food item
+const removeFood = async (req, res) => {
+    try {
+        const food = await foodModel.findById(req.body.id);
+        fs.unlink(`uploads/${food.image}`,()=>{})
 
-// all food list
-const listFood = async (req, res) => {
-    try{
-        const foods = await foodModel.find({});
-        res.json({success:true,data:foods})
-    }catch(error){
+        await foodModel.findByIdAndDelete(req.body.id);
+        res.json({success:true,message:"food Removed"})
+    } catch (error){
         console.log(error);
-        res.json({sucess:false,message:"Error"})
+        res.json({success:false,message:"Error"})
     }
 }
 
-export { addFood, listFood }
+// all food list
+const listFood = async (req, res) => {
+    try {
+        const foods = await foodModel.find({});
+        res.json({ success: true, data: foods })
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "Error" })
+    }
+}
+
+export { addFood, listFood, removeFood }
