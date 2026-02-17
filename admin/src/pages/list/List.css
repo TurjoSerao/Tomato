@@ -1,0 +1,230 @@
+.list {
+    padding: 30px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-header h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin: 0;
+    font-weight: 600;
+}
+
+.list-count {
+    background-color: tomato;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Loading State */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    gap: 20px;
+}
+
+.loader {
+    border: 5px solid #e8e8e8;
+    border-top: 5px solid #667eea;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+    color: tomato;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state p {
+    color: #95a5a6;
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Table Styling */
+.list-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.list-table thead {
+    background-color: tomato;
+    color: white;
+}
+
+.list-table th {
+    padding: 18px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.list-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #ecf0f1;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.list-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.list-table tbody tr:hover {
+    background-color: #f8f9fa;
+    box-shadow: inset 0 0 20px rgba(102, 126, 234, 0.1);
+    transform: scale(1.01);
+}
+
+/* Table Images */
+.list-table td img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #ecf0f1;
+    transition: transform 0.3s ease;
+}
+
+.list-table tbody tr:hover td img {
+    transform: scale(1.08);
+    border-color: #667eea;
+}
+
+/* Table Text Styling */
+.list-table td:nth-child(2) {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.list-table td:nth-child(3) {
+    color: #7f8c8d;
+    text-transform: capitalize;
+}
+
+.list-table td:nth-child(4) {
+    font-weight: 600;
+    color: #27ae60;
+}
+
+/* Delete Button */
+.delete-btn {
+    max-width: 120px;
+    border: none;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+.delete-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(245, 87, 108, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .list {
+        padding: 15px;
+    }
+
+    .list-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .list-header h1 {
+        font-size: 22px;
+    }
+
+    .list-table {
+        font-size: 12px;
+    }
+
+    .list-table th,
+    .list-table td {
+        padding: 12px 10px;
+    }
+
+    .list-table td img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .delete-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .list-header h1 {
+        font-size: 18px;
+    }
+
+    .list-table {
+        font-size: 11px;
+    }
+
+    .list-table th,
+    .list-table td {
+        padding: 10px 8px;
+    }
+
+    .list-table td img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .delete-btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+}
